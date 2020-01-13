@@ -1,32 +1,8 @@
-# Slick masternode VPS setup for all your beloved crypto masternodes (Vultr example)
-
-
----
-**PLEASE ALSO READ THE README**
-
-Please also see the [README for this project](../README.md) that will give you a high-level overview of features. 
-
----
-
-## Intro
-
-This project started as handy bash script to setup my $PIVX masternodes in 2016 when there was almost zero documentation and anything that existed was either $DASH specific, sucked and in most cases both. For that reason, i started to work on a not-so-sucking way to install a lot of different masternodes with next to none manual intervention.
-
-If you are not already aware, visit the project site and join the slack. The website at [https://pivx.org/](https://pivx.org/) is also well worth a visit. 
-
-<img src="images/masternode_vps/intro.png" alt="introduction" class="inline"/>
+# (Vultr example) Multi Masternode VPS setup for your ABET masternodes
 
 ## Get a VPS system for your masternode(s)
 
-I will use vultr for my instructions, but in practice and with a bit of tuning any hoster that gives you multiple free IPv6 addresses. Register / login with vultr.
-
-Feel free to use my reflink to signup and receive a bonus w/ vultr:
-<a href="https://www.vultr.com/?ref=7424168"><img src="https://www.vultr.com/media/banner_2.png" width="468" height="60"></a>
-
-If you wish to use DigitalOcean you can use this referal link but the following guide will only go over Vultr.
-Deploy your next app in seconds. Get $100 in cloud credits from DigitalOcean using my link: <a href="https://m.do.co/t/a3f23a15f9af">"<img src="https://blog.microdreamit.com/wp-content/uploads/2019/08/Digital-Ocean-Credit.gif" width="468" height="60"></a>
-
-It's also great that you can use Bitcoin to pay!
+We will use **Vultr** for this instructions, but in practice and with a bit of tuning any hoster that gives you multiple free IPv6 addresses. Register / login with vultr.
 
 <img src="images/masternode_vps/get-a-vps-system-for-your-masternode-s-.png" alt="VPS signup" class="inline"/>
 
@@ -50,7 +26,7 @@ Select Ubuntu 16.04, i am mostly testing for that version.
 
 ## VPS size
 
-A decent masternode needs a bit of RAM and some storage space. The $5 instance is good enough for up to 5 masternodes. I recommend not running more than 3 production masternodes in parallel, since block rewards suffer from instability (eg when your nodes go down every couple of hours).
+A decent masternode needs a bit of RAM and some storage space. The $5 instance will be good enough for up to 20 ABET masternodes. I recommend not running more than 30 production masternodes in parallel, since block rewards suffer from instability (eg when your nodes go down every couple of hours).
 
 <img src="images/masternode_vps/vps-size.png" alt="VPS sizing" class="inline"/>
 
@@ -84,16 +60,21 @@ Login to your newly installed node as "root".
 Clone this git repository first:
 
 ```
-git clone https://github.com/MotoAcidic/Abet-MultiNode.git && cd vps
+git clone https://github.com/altbet/multi-mn-script.git && cd multi-mn-script
 ```
 
+##Add executable permission to script:
 
-## Install the desired masternode and amount
+```bash
+chmod +x install.sh
+```
 
-Use the *./install.sh* script with the desired crypto and masternode count as parameters, e.g. to install 4 PIVX masternodes:
+## Install the ABET masternode and amount
+
+Use the *./install.sh* script with the abet and masternode count as parameters, e.g. to install 4 ABET masternodes:
 
 ```
-./install.sh -p abet -c 4
+./install.sh -p abet -c 4 -n "6"
 ```
 
 The script downloads, compiles and configures the system now. This will usually take between 5-15 minutes.
@@ -118,7 +99,22 @@ The generated configuration files are located at /etc/masternodes/. One file per
 
 ## Insert your masternode private key
 
-In 99% you can use the generated settings as is. The only value you MUST change is the masternode private key, generated in your controller wallet. Contact the individual crypto community if unsure, although the steps are identical for most master node coins. Check the [Dash documentation for example](https://dashpay.atlassian.net/wiki/spaces/DOC/pages/1867877/Start+multiple+masternodes+from+one+wallet+start-many).
+In 99% you can use the generated settings as is. The only value you MUST change is the **masternode private key** known also as **masternode outputs**, generated in your controller wallet.
+
+To generate **masternode private key** in **abet-qt** go to taskbar, find Tools and then go to Debug console and use command below:
+
+```
+createmasternodekey
+```
+
+To display your list of **masternode private keys** in **abet-qt** go to taskbar, find Tools and then go to Debug console and use command below:
+```
+getmasternodeoutputs
+```
+
+This can be helpful too: [PIVX Masternode setup guide](https://pivx.org/knowledge-base/masternode-setup-guide/).
+
+If you will experience issues with **Nodemaster**, don't hestitate to ask us for help in our [support discord channel](https://discord.gg/Ka5K9g5).
 
 <img src="images/masternode_vps/insert-your-masternode-private-key.png" alt="the master node private key" class="inline"/>
 
@@ -127,7 +123,7 @@ In 99% you can use the generated settings as is. The only value you MUST change 
 
 A script to enable masternode start at boot has been created at */usr/local/bin/activate_masternodes_${CODENAME}.sh* for your convenience. There is exactly one script per installed masternode crypto.
 
-Run it after you finished configuration, e.g. after a Abet installation do.
+Run it after you finished configuration, e.g. after a ABET installation do.
 
 ```
 /usr/local/bin/activate_masternodes_abet
@@ -135,13 +131,13 @@ Run it after you finished configuration, e.g. after a Abet installation do.
 
 ## Last step, the controller
 
-To activate the new nodes in your _local_ (not the VPS) controller wallet, add the bind address entries with port to a file called "masternode.conf" as usual.
+To activate the new ABET masternodes in your _local_ (not the VPS) controller wallet, add the bind address entries with port to a file called "masternode.conf" as usual.
 
      MN1 [2002:470:1111:1a4:51]:8322 KEY TX OUTPUT
      MN2 [2003:470:1111:1a4:52]:8322 KEY TX OUTPUT
      MN3 [2003:470:1111:1a4:53]:8322 KEY TX OUTPUT
 
-To make this a bit easier for large installations, i implemented a small gimmick in the newest version. Now after the script has run, a partial of the "masternode.conf" file is generated and placed on the VPS eg for XIOS at "/tmp/abet_masternode.conf"
+To make this a bit easier for large installations, script has implemented a small gimmick in the newest version. Now after the script has run, a partial of the "masternode.conf" file is generated and placed on the VPS eg for ABET at "/tmp/abet_masternode.conf"
 
 So you can take the contents from there and paste it into your local controller-wallets masternode.conf all that you need to add is the relevant pieces from "masternode outputs"
 
@@ -180,17 +176,10 @@ If you want to check the status of your masternode, the best way is currently ru
 
 ```
 
+# Help, Issues and Questions
 
-# Issues and Questions
+If you will experience issues with **Nodemaster**, don't hestitate to ask us for help in our [support discord channel](https://discord.gg/Ka5K9g5).
 
-Please open github issue in case of questions or issues. I might not be able to reply immediately, but i do usually within a couple of days at worst.
+# Credits to Author
 
-If my scripts work for you, please send some crypto my way here:
-
-**Have fun, this is crypto after all!**
-
-Send BTC to:
-
-```
-BTC  19U8Jgyb38XnbGyQq3SHXS614pmLbvwKeZ
-```
+You can ping him via contact@marsmenschen.com for questions or you can donate him via BTC for this great script: 19U8Jgyb38XnbGyQq3SHXS614pmLbvwKeZ
