@@ -4,8 +4,6 @@ The **Nodemaster** scripts is a collection of utilities to manage, setup and upd
 
 We are confident this is the single best and almost effortless way to setup multiple ABET masternodes, without bothering too much about the setup part.
 
-**Vultr** is highly recommended for this kind of setup. Here is an [easy step-by-step guide for the VPS provider vultr](/docs/vultr-masternode_vps.md) that will guide you through the hardest parts.
-
 Comparing with building from source manually, you will benefit from using this script in the following way(s):
 
 * 100% auto-compilation and 99% of configuration on the masternode side of things. It is currently only tested on a vultr VPS but should work almost anywhere where IPv6 addresses are available
@@ -16,6 +14,10 @@ Comparing with building from source manually, you will benefit from using this s
 * Automatic startup for all masternode daemons
 * This script needs to run as root, the masternodes will and should not!
 * It's ipv6 enabled, tor/onion will follow
+
+## **Vultr** is highly recommended for this kind of setup
+
+Here is an [easy step-by-step guide for the VPS provider vultr](/docs/vultr-masternode_vps.md) that will guide you through the hardest parts.
 
 ## Installation
 
@@ -39,7 +41,7 @@ Install & configure your ABET masternode with option:
 
 ## Examples for typical script invocation
 
-These are only a couple of examples for typical setups. Check my [easy step-by-step guide for [vultr](/docs/masternode_vps.md) that will guide you through the hardest parts.
+These are only a couple of examples for typical setups. Check our [easy step-by-step guide for [Vultr](/docs/vultr-masternode_vps.md) that will guide you through the hardest parts.
 
 **Install & configure 4 ABET masternodes (IPV6):**
 

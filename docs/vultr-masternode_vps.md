@@ -36,7 +36,6 @@ Multiple masternodes on one VPS require multiple IPv6 addresses. Toggle "Enable 
 
 <img src="images/masternode_vps/activating-additional-features--ipv6-.png" alt="VPS sizing" class="inline"/>
 
-
 ## Hostnames & number of VPS
 
 Choose how many instances you want and click "Deploy Now".
@@ -63,7 +62,7 @@ Clone this git repository first:
 git clone https://github.com/altbet/multi-mn-script.git && cd multi-mn-script
 ```
 
-##Add executable permission to script:
+## Add executable permission to script:
 
 ```bash
 chmod +x install.sh
@@ -114,10 +113,9 @@ getmasternodeoutputs
 
 This can be helpful too: [PIVX Masternode setup guide](https://pivx.org/knowledge-base/masternode-setup-guide/).
 
-If you will experience issues with **Nodemaster**, don't hestitate to ask us for help in our [support discord channel](https://discord.gg/Ka5K9g5).
-
 <img src="images/masternode_vps/insert-your-masternode-private-key.png" alt="the master node private key" class="inline"/>
 
+If you will experience issues with **Nodemaster**, don't hestitate to ask us for help in our [support discord channel](https://discord.gg/Ka5K9g5).
 
 ## Start your new masternodes
 
